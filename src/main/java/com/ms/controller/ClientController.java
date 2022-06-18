@@ -1,6 +1,9 @@
 package com.ms.controller;
 import com.ms.entities.*;
 import com.ms.services.ClientService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +28,18 @@ public class ClientController {
         client = clientService.save(client);
         return ResponseEntity.status(HttpStatus.FOUND).body(client);
 
+    }
+    
+    @GetMapping("/client")
+    public ResponseEntity<?> getAll(){
+        List<Client> clientList = clientService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(clientList);
+    }
+    
+    @DeleteMapping("/client/{id}")
+    public Object delete(@PathVariable Long id)
+    {
+        clientService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("deleted");
     }
 }
