@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping(path = "/client")
 public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @PostMapping("/client/addclient")
+    @PostMapping("/Create")
     public ResponseEntity<?> save(@RequestBody Client client ){
 
         client =  clientService.save(client);
         return ResponseEntity.status(HttpStatus.FOUND).body(client);
 
     }
-    @PutMapping("/update")
+    @PutMapping("/Update")
     public ResponseEntity<?> update(@RequestBody Client client){
 
         client = clientService.save(client);
@@ -30,13 +31,13 @@ public class ClientController {
 
     }
     
-    @GetMapping("/client")
+    @GetMapping("/GetAll")
     public ResponseEntity<?> getAll(){
         List<Client> clientList = clientService.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(clientList);
     }
     
-    @DeleteMapping("/client/{id}")
+    @DeleteMapping("/Delete/{id}")
     public Object delete(@PathVariable Long id)
     {
         clientService.deleteById(id);
